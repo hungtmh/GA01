@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GA01 - Trang chủ</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html">
+        <img src="assets/images/logo.png" alt="GA01 Logo" />
+        <span>GA01</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="primaryMenu">☰</button>
+        <ul id="primaryMenu" class="menu">
+          <li><a class="active" href="index.html">Trang chủ</a></li>
+          <li><a href="about.html">Về nhóm</a></li>
+          <li><a href="#members">Thành viên</a></li>
+          <li><a href="#contact">Liên hệ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <aside class="sidebar">
+      <h3>Thông tin nhanh</h3>
+      <ul>
+        <li>Tên nhóm: GA01</li>
+        <li>Số thành viên: 4</li>
+        <li>Lĩnh vực: Web Dev</li>
+      </ul>
+    </aside>
+
+    <section class="content">
+      <section class="hero">
+        <h1>Chào mừng đến với GA01</h1>
+        <p>Website giới thiệu nhóm và các thành viên.</p>
+      </section>
+
+      <section id="members" class="members">
+        <h2>Thành viên</h2>
+        <div class="grid">
+          <article class="card">
+            <img src="assets/images/member1.jpg" alt="Member 1" />
+            <h3>Nguyễn Văn A</h3>
+            <p>Team Lead / Full‑stack</p>
+            <a class="btn" href="members/member1.html">Xem chi tiết</a>
+          </article>
+          <article class="card">
+            <img src="assets/images/member2.jpg" alt="Member 2" />
+            <h3>Trần Thị B</h3>
+            <p>UI/UX Designer</p>
+            <a class="btn" href="members/member2.html">Xem chi tiết</a>
+          </article>
+          <article class="card">
+            <img src="assets/images/member3.jpg" alt="Member 3" />
+            <h3>Lê Văn C</h3>
+            <p>Frontend Developer</p>
+            <a class="btn" href="members/member3.html">Xem chi tiết</a>
+          </article>
+          <article class="card">
+            <img src="assets/images/member4.jpg" alt="Member 4" />
+            <h3>Phạm Thị D</h3>
+            <p>Backend Developer</p>
+            <a class="btn" href="members/member4.html">Xem chi tiết</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <h2>Liên hệ</h2>
+        <ul>
+          <li>Email: ga01.team@example.com</li>
+          <li>Phone: +84 123 456 789</li>
+        </ul>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>&copy; 2025 GA01</small>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
