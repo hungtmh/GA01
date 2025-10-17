@@ -35,7 +35,7 @@ img{max-width:100%;display:block}
 .hero h1{margin:0 0 10px}
 
 /* Cards */
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
 .card img{height:160px;object-fit:cover}
 .card h3{margin:12px 12px 0}

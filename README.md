@@ -11,10 +11,11 @@ GA01-Group-Website/
 ├─ index.html
 ├─ about.html
 ├─ members/
-│  ├─ member1.html
-│  ├─ member2.html
-│  ├─ member3.html
-│  └─ member4.html
+│  ├─ tran-manh-hung.html
+│  ├─ bui-duong-duy-cuong.html
+│  ├─ nguyen-anh-khoa.html
+│  ├─ nguyen-tan-thang.html
+│  └─ ninh-van-khai.html
 ├─ css/
 │  └─ style.css
 ├─ js/
@@ -22,10 +23,11 @@ GA01-Group-Website/
 └─ assets/
 	└─ images/
 		├─ logo.png (placeholder)
-		├─ member1.jpg (placeholder)
-		├─ member2.jpg (placeholder)
-		├─ member3.jpg (placeholder)
-		└─ member4.jpg (placeholder)
+		├─ tran-manh-hung.jpg (placeholder)
+		├─ bui-duong-duy-cuong.jpg (placeholder)
+		├─ nguyen-anh-khoa.jpg (placeholder)
+		├─ nguyen-tan-thang.jpg (placeholder)
+		└─ ninh-van-khai.jpg (placeholder)
 ```
 
 ### Phân công gợi ý (có thể thay đổi)
