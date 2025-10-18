@@ -1,13 +1,30 @@
-# GA01
+# GA01 – Group Website
 
-## GA01-Group-Website
+Live site: https://ga-01.vercel.app
 
-Thư mục dự án: `GA01-Group-Website/`
+This is a simple, responsive website introducing the GA01 group and its members. It is built with plain HTML, CSS, and a little JavaScript.
 
-### Cấu trúc
+## Quick start
+
+Option A – Open locally (no server required):
+- Download or clone the repository
+- Open `index.html` in your browser
+
+Option B – Run with a local static server (optional):
+
+```powershell
+# Python 3 built‑in HTTP server
+python -m http.server 8080
+
+# or with Node.js (requires npm)
+npx serve . -l 8080
+```
+
+Then visit http://localhost:8080
+
+## Project structure
 
 ```
-GA01-Group-Website/
 ├─ index.html
 ├─ about.html
 ├─ members/
@@ -22,54 +39,33 @@ GA01-Group-Website/
 │  └─ script.js
 └─ assets/
 	└─ images/
-		├─ logo.png (placeholder)
-		├─ tran-manh-hung.jpg (placeholder)
-		├─ bui-duong-duy-cuong.jpg (placeholder)
-		├─ nguyen-anh-khoa.jpg (placeholder)
-		├─ nguyen-tan-thang.jpg (placeholder)
-		└─ ninh-van-khai.jpg (placeholder)
+		├─ logo.png
+		├─ tran-manh-hung.jpg
+		├─ bui-duong-duy-cuong.jpg
+		├─ nguyen-anh-khoa.jpg
+		├─ nguyen-tan-thang.jpg
+		└─ ninh-van-khai.jpg
 ```
 
-### Phân công gợi ý (có thể thay đổi)
+## Features
+- Home page and About page
+- 5 member detail pages
+- Responsive layout (header, navigation, footer, sidebar)
+- Theme via CSS variables (dark: slate + emerald)
 
-- Thành viên 1 (Lead): Kiến trúc dự án, header/footer, build & deploy.
-- Thành viên 2 (UI/UX): Màu sắc, style.css, responsive.
-- Thành viên 3 (Frontend): `index.html`, components thẻ card, mobile nav.
-- Thành viên 4 (Nội dung): `about.html`, nội dung chi tiết từng `members/*.html`, ảnh.
+## Theming
+Colors are centralized in `css/style.css` under the `:root` variables. Change these to switch themes (background, text, primary button/link, borders, etc.).
 
-### Tiêu chí chấm điểm mapping
+## Hosting
+- Hosted on Vercel: https://ga-01.vercel.app
+- Any static host works (GitHub Pages/Netlify/etc.) since this is a pure static site.
 
-- Thông tin: `index.html` (tổng quan), `members/*.html` (chi tiết) – 4.0
-- Theme & màu: `css/style.css` (màu chủ đạo emerald/slate) – 2.0
-- Responsive: header, nav, footer, sidebar, grid – 2.0
-- Public host: GitHub Pages – 2.0
+## Team
+- Trần Mạnh Hùng (Lead)
+- Bùi Dương Duy Cường
+- Nguyễn Anh Khoa
+- Nguyễn Tấn Thắng
+- Ninh Văn Khải
 
-### Hướng dẫn deploy GitHub Pages
-
-1) Commit code vào nhánh `main`
-
-2) Bật GitHub Pages
-	- Vào Settings → Pages
-	- Source: Deploy from a branch
-	- Branch: `main`, Folder: `/root` (do file `index.html` nằm trong `GA01-Group-Website/`, bạn có 2 cách):
-	  - Cách A (đơn giản): Di chuyển nội dung website ra thư mục gốc repo, hoặc
-	  - Cách B: Giữ nguyên cấu trúc và đặt "Folder" là `/docs` rồi chuyển toàn bộ `GA01-Group-Website` thành `/docs`.
-
-3) Khuyến nghị cách B (ít xáo trộn):
-	- Đổi tên thư mục `GA01-Group-Website` → `docs`
-	- Settings → Pages → Branch: `main` | Folder: `/docs`
-	- Chờ 1–2 phút, URL public sẽ có dạng:
-	  `https://<username>.github.io/<repo>/`
-
-4) Kiểm tra và cập nhật link public vào báo cáo/bài nộp.
-
-### Phát triển tiếp theo (gợi ý)
-
-- Thêm nội dung thật cho từng thành viên, ảnh thật thay placeholder.
-- Thêm form liên hệ (HTML + Formspree hoặc email link).
-- Tối ưu Lighthouse: contrast, aria-label, meta tags SEO.
-- Thêm favicon, Open Graph images.
-
-### Chạy cục bộ
-
-Mở file `GA01-Group-Website/index.html` trực tiếp bằng trình duyệt hoặc dùng live server.
+## License
+See `LICENSE` for details.
