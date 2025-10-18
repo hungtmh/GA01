@@ -11,14 +11,10 @@ Please follow the guidelines below to keep our workflow clean and consistent.
 feature/short-description
 fix/short-description
 
-yaml
-Sao chép mã
-📌 Example:
+Example:
 feature/login-page
 fix/navbar-bug
 
-yaml
-Sao chép mã
 
 - After finishing your task:
 - Push your branch to GitHub.
@@ -40,18 +36,12 @@ Use the following format for commit messages:
 
 type: short description
 
-yaml
-Sao chép mã
-
-📌 Examples:
+Examples:
 feat(Hung): add login page
-fix(Ngoc): fix API returning 404
-style(Minh): update header color
-refactor(Phuc): optimize Navbar component
-docs(Nam): update README
-
-yaml
-Sao chép mã
+fix(Cuong): fix API returning 404
+style(Khoa): update header color
+refactor(Khai): optimize Navbar component
+docs(Thang): update README
 
 **Allowed types:**
 | Type       | Meaning                                |
