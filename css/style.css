@@ -108,19 +108,37 @@ img {
 .content {
   background: transparent;
 }
-
-/*a link*/
+/* a-link */
 a:link {
-  color: rgb(173, 173, 173);
+  color: var(--text);
+  text-decoration: none;
 }
 
 a:visited {
-  color: rgb(173, 173, 173);
+  color: var(--text);
 }
 
 a:hover {
-  color: rgb(184, 187, 251);
-  text-decoration: underline; /* Thêm gạch chân khi di chuột */
+  color: var(--primary-600);
+  text-decoration: underline;
+}
+
+/* Side bar */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar a:link,
+.sidebar a:visited {
+  color: var(--text);
+  text-decoration: none;
+  display: block;
+  padding: 6px 0;
+}
+.sidebar a:hover {
+  color: var(--primary);
+  text-decoration: none;
 }
 /* Hero */
 .hero {
@@ -213,6 +231,214 @@ a:hover {
   padding: 16px;
 }
 
+/* Trang value.html */
+.value-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+
+.value-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+}
+
+.value-header h2 {
+  margin: 0;
+  color: var(--primary);
+}
+
+.value-examples {
+  padding-left: 24px;
+}
+
+.value-examples li {
+  margin-bottom: 6px;
+  color: var(--muted);
+}
+
+.values-summary {
+  background: var(--panel); /* Dùng nền tối hơn */
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-top: 24px;
+}
+.values-summary h2 {
+  margin-top: 0;
+}
+
+/* Style cho phần contact */
+.contact-info {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.contact-item {
+  padding: 6px 0;
+}
+.contact-item strong {
+  color: var(--muted);
+  min-width: 90px;
+  display: inline-block;
+}
+
+/* Trang mission.html */
+.mission-intro,
+.mission-approach {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.mission-goals h2,
+.mission-approach h2 {
+  margin-top: 0;
+}
+/* Grid cho các mục tiêu */
+.goals-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 cột */
+  gap: 16px;
+  margin: 20px 0;
+}
+.goal-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.goal-card h3 {
+  margin: 0 0 8px;
+  color: var(--primary);
+}
+.goal-card p {
+  margin: 0;
+  color: var(--muted);
+}
+.goal-icon {
+  font-size: 1.75rem;
+  margin-bottom: 12px;
+}
+
+/* Trang vision.html */
+.vision-intro,
+.vision-future {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+.vision-intro h2,
+.vision-future h2 {
+  margin-top: 0;
+}
+/* Timeline */
+.goals-timeline {
+  border-left: 3px solid var(--primary);
+  padding-left: 24px;
+  margin: 24px 0 32px;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 24px;
+}
+/* Dấu chấm tròn trên timeline */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -33.5px; /* (24px padding + 3px border + 6px dot/2) */
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  background: var(--bg);
+  border: 3px solid var(--primary);
+  border-radius: 50%;
+}
+.timeline-phase {
+  font-weight: 700;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+.timeline-content h3 {
+  margin: 0 0 8px;
+}
+.timeline-content p {
+  margin: 0;
+}
+/* Grid các kỹ năng */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 20px 0;
+}
+.skill-category {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.skill-category h3 {
+  margin-top: 0;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+}
+.skill-category ul {
+  padding-left: 20px;
+  margin: 0;
+  color: var(--muted);
+}
+.skill-category li {
+  margin-bottom: 4px;
+}
+/* Grid kế hoạch tương lai */
+.future-plans {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.plan-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.plan-item h3 {
+  margin: 0 0 8px;
+}
+.plan-item p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Cập nhật responsive cho class mới */
+  .goals-grid {
+    grid-template-columns: 1fr;
+  }
+  .skills-grid,
+  .future-plans {
+    grid-template-columns: 1fr;
+  }
+}
 /* Responsive */
 @media (max-width: 980px) {
   .layout {
