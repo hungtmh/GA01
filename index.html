@@ -1,89 +1,109 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tây Du Ký - Trang chủ</title>
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="index.html">
-        <span>TÂY DU KÝ</span>
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="primaryMenu">☰</button>
-        <ul id="primaryMenu" class="menu">
-          <li><a class="active" href="index.html">Trang chủ</a></li>
-          <li><a href="about.html">Về nhóm</a></li>
-          <li><a href="#members">Thành viên</a></li>
-      
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tây Du Ký - Trang chủ</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="index.html">
+          <img src="assets/images/logo.png" alt="Team Logo" />
+          <span>TÂY DU KÝ</span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <button
+            id="menuToggle"
+            class="menu-toggle"
+            aria-expanded="false"
+            aria-controls="primaryMenu"
+          >
+            ☰
+          </button>
+          <ul id="primaryMenu" class="menu">
+            <li><a class="active" href="index.html">Trang chủ</a></li>
+            <li><a href="about.html">Về nhóm</a></li>
+            <li><a href="#member">Thành viên</a></li>
+            <li><a href="contact.html">Liên hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container layout">
+      <aside class="sidebar">
+        <h3>Thông tin nhanh</h3>
+        <ul>
+          <li>Tên nhóm: Tây Du Ký</li>
+          <li>Số thành viên: 5</li>
+          <li>Lĩnh vực: Web Dev</li>
         </ul>
-      </nav>
-    </div>
-  </header>
+      </aside>
 
-  <main class="container layout">
-    <aside class="sidebar">
-      <h3>Thông tin nhanh</h3>
-      <ul>
-        <li>Tên nhóm: Tây Du Ký</li>
-        <li>Số thành viên: 5</li>
-        <li>Lĩnh vực: Web Dev</li>
-      </ul>
-    </aside>
+      <section class="content">
+        <section class="hero">
+          <h1>Chào mừng đến với Tây Du Ký</h1>
+          <p>Website giới thiệu nhóm và các thành viên.</p>
+        </section>
 
-    <section class="content">
-      <section class="hero">
-        <h1>Chào mừng đến với Tây Du Ký</h1>
-        <p>Website giới thiệu nhóm và các thành viên.</p>
+        <section id="members" class="members">
+          <h2>Thành viên</h2>
+          <div class="grid">
+            <article class="card">
+              <img src="assets/images/Hung.jpg" alt="Trần Mạnh Hùng" />
+              <h3>Trần Mạnh Hùng</h3>
+              <p>Lead</p>
+              <a class="btn" href="members/tran-manh-hung.html">Xem chi tiết</a>
+            </article>
+            <article class="card">
+              <img
+                src="assets/images/bui-duong-duy-cuong.png"
+                alt="Bùi Dương Duy Cường"
+              />
+              <h3>Bùi Dương Duy Cường</h3>
+              <p>Thành viên</p>
+              <a class="btn" href="members/bui-duong-duy-cuong.html"
+                >Xem chi tiết</a
+              >
+            </article>
+            <article class="card">
+              <img
+                src="assets/images/nguyen-anh-khoa.png"
+                alt="Nguyễn Anh Khoa"
+              />
+              <h3>Nguyễn Anh Khoa</h3>
+              <p>Thành viên</p>
+              <a class="btn" href="members/nguyen-anh-khoa.html"
+                >Xem chi tiết</a
+              >
+            </article>
+            <article class="card">
+              <img src="assets/images/Thang.jpg" alt="Nguyễn Tấn Thắng" />
+              <h3>Nguyễn Tấn Thắng</h3>
+              <p>Thành viên</p>
+              <a class="btn" href="members/nguyen-tan-thang.html"
+                >Xem chi tiết</a
+              >
+            </article>
+            <article class="card">
+              <img src="assets/images/ninh-van-khai.JPEG" alt="Ninh Văn Khải" />
+              <h3>Ninh Văn Khải</h3>
+              <p>Thành viên</p>
+              <a class="btn" href="members/ninh-van-khai.html">Xem chi tiết</a>
+            </article>
+          </div>
+        </section>
       </section>
+    </main>
 
-      <section id="members" class="members">
-        <h2>Thành viên</h2>
-        <div class="grid">
-          <article class="card">
-            <img src="assets/images/Hung.jpg" alt="Trần Mạnh Hùng" />
-            <h3>Trần Mạnh Hùng</h3>
-            <p>Lead</p>
-            <a class="btn" href="members/tran-manh-hung.html">Xem chi tiết</a>
-          </article>
-          <article class="card">
-            <img src="assets/images/bui-duong-duy-cuong.png" alt="Bùi Dương Duy Cường" />
-            <h3>Bùi Dương Duy Cường</h3>
-            <p>Thành viên</p>
-            <a class="btn" href="members/bui-duong-duy-cuong.html">Xem chi tiết</a>
-          </article>
-          <article class="card">
-            <img src="assets/images/nguyen-anh-khoa.png" alt="Nguyễn Anh Khoa" />
-            <h3>Nguyễn Anh Khoa</h3>
-            <p>Thành viên</p>
-            <a class="btn" href="members/nguyen-anh-khoa.html">Xem chi tiết</a>
-          </article>
-          <article class="card">
-            <img src="assets/images/Thang.jpg" alt="Nguyễn Tấn Thắng" />
-            <h3>Nguyễn Tấn Thắng</h3>
-            <p>Thành viên</p>
-            <a class="btn" href="members/nguyen-tan-thang.html">Xem chi tiết</a>
-          </article>
-          <article class="card">
-            <img src="assets/images/ninh-van-khai.jpg" alt="Ninh Văn Khải" />
-            <h3>Ninh Văn Khải</h3>
-            <p>Thành viên</p>
-            <a class="btn" href="members/ninh-van-khai.html">Xem chi tiết</a>
-          </article>
-        </div>
-      </section>
-    </section>
-  </main>
+    <footer class="site-footer">
+      <div class="container">
+        <small>&copy; 2025 TayDuKy</small>
+      </div>
+    </footer>
 
-  <footer class="site-footer">
-    <div class="container">
-  <small>&copy; 2025 Tây Du Ký</small>
-    </div>
-  </footer>
-
-  <script src="js/script.js"></script>
-</body>
+    <script src="js/script.js"></script>
+  </body>
 </html>

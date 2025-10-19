@@ -1,126 +1,86 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tây Du Ký - Về nhóm</title>
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="index.html">
-        <span>TÂY DU KÝ</span>
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <button id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="primaryMenu">☰</button>
-        <ul id="primaryMenu" class="menu">
-          <li><a href="index.html">Trang chủ</a></li>
-          <li><a class="active" href="about.html">Về nhóm</a></li>
-          <li><a href="index.html#members">Thành viên</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tây Du Ký - Về nhóm</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="index.html">
+          <img src="assets/images/logo.png" alt="Team Logo" />
+          <span>TÂY DU KÝ</span>
+        </a>
+        <nav class="nav" aria-label="Primary">
+          <button
+            id="menuToggle"
+            class="menu-toggle"
+            aria-expanded="false"
+            aria-controls="primaryMenu"
+          >
+            ☰
+          </button>
+          <ul id="primaryMenu" class="menu">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li><a class="active" href="about.html">Về nhóm</a></li>
+            <li><a href="index.html#members">Thành viên</a></li>
+            <li><a href="contact.html">Liên hệ</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-  <main class="container layout">
-    <aside class="sidebar">
-      <h3>Mục lục</h3>
-      <ul>
-        <li><a href="#mission">Sứ mệnh</a></li>
-        <li><a href="#vision">Tầm nhìn</a></li>
-        <li><a href="#values">Giá trị cốt lõi</a></li>
-        <li><a href="index.html#members">Danh sách thành viên (5)</a></li>
-      </ul>
-    </aside>
-
-    <section class="content">
-      <h1>Về Tây Du Ký</h1>
-      <p>Tây Du Ký là nhóm gồm 5 thành viên đam mê phát triển web. Chúng tôi chú trọng vào thiết kế hiện đại, hiệu năng tốt, và trải nghiệm người dùng nhất quán trên mọi thiết bị. Mục tiêu của Tây Du Ký là học tập thông qua dự án thực tế và hoàn thiện kỹ năng teamwork.</p>
-
-      <h2 id="mission">Sứ mệnh</h2>
-      <div class="content-box">
-        <p>Tạo ra các website chất lượng, dễ dùng, và bền vững. Chúng tôi:</p>
+    <main class="container layout">
+      <aside class="sidebar">
+        <h3>Thông tin chi tiết</h3>
         <ul>
-          <li>Ưu tiên trải nghiệm người dùng (UX) và khả năng truy cập (a11y)</li>
-          <li>Giữ code sạch, dễ bảo trì, tuân thủ tiêu chuẩn</li>
-          <li>Học hỏi công nghệ mới và áp dụng hợp lý</li>
-          <li>Làm việc nhóm minh bạch, tôn trọng deadline</li>
+          <li><a href="mission.html">Sứ mệnh</a></li>
+          <li><a href="vision.html">Tầm nhìn</a></li>
+          <li><a href="values.html">Giá trị cốt lõi</a></li>
+          <li><a href="index.html#members">Danh sách thành viên</a></li>
         </ul>
-      </div>
+      </aside>
 
-      <h2 id="vision">Tầm nhìn</h2>
-      <div class="content-box">
-        <p>Trở thành một nhóm sinh viên tiêu biểu có portfolio chất lượng, sẵn sàng tham gia các dự án thực tế hoặc cuộc thi học thuật về công nghệ web.</p>
-      </div>
+      <section class="content">
+        <h1>Về Tây Du Ký</h1>
+        <p>
+          Tây Du Ký là nhóm gồm 5 thành viên HCMUS. Chúng tôi chú trọng vào
+          thiết kế hiện đại, hiệu năng tốt, và trải nghiệm người dùng nhất quán
+          trên mọi thiết bị. Mục tiêu của Tây Du Ký là học tập thông qua dự án
+          thực tế, thực hành sau khi học lý thuyết trên lớp và hoàn thiện kỹ
+          năng teamwork.
+        </p>
 
-      <h2 id="values">Giá trị cốt lõi</h2>
-      <div class="values-grid">
-        <div class="value-item">
-          <h3>Chất lượng</h3>
-          <p>Tập trung vào kết quả có giá trị, tối ưu và dễ dùng.</p>
-        </div>
-        <div class="value-item">
-          <h3>Sáng tạo</h3>
-          <p>Khuyến khích ý tưởng mới, thử nghiệm an toàn.</p>
-        </div>
-        <div class="value-item">
-          <h3>Hợp tác</h3>
-          <p>Trao đổi rõ ràng, hỗ trợ nhau hoàn thành mục tiêu.</p>
-        </div>
-        <div class="value-item">
-          <h3>Học hỏi</h3>
-          <p>Nâng cao kỹ năng thông qua phản hồi và cải tiến liên tục.</p>
-        </div>
-      </div>
+        <h2 id="mission">Sứ mệnh</h2>
+        <p>
+          Tạo ra sản phẩm web chất lượng, và qua môn học các thành viên trong
+          nhóm sẽ có thêm kỹ năng cho nghề nghiệp tương lai.
+        </p>
 
-      <h2>Giới thiệu đội ngũ</h2>
-      <ul>
-        <li>Trần Mạnh Hùng (Lead)</li>
-        <li>Bùi Dương Duy Cường</li>
-        <li>Nguyễn Anh Khoa</li>
-        <li>Nguyễn Tấn Thắng</li>
-        <li>Ninh Văn Khải</li>
-      </ul>
+        <h2 id="vision">Tầm nhìn</h2>
+        <p>
+          Sáng tạo và hoàn thành tốt project được giao trong quá trình học tập.
+        </p>
 
-      <h2>Quy trình & Công cụ</h2>
-      <div class="content-box">
+        <h2 id="values">Giá trị cốt lõi</h2>
         <ul>
-          <li>Quy ước commit: Conventional Commits, scope theo khu vực (index, about, members, css, js, assets, readme)</li>
-          <li>Nhánh làm việc: feature/<alias>/<topic>, fix/<alias>/<topic></li>
-          <li>Code review qua Pull Request trước khi merge</li>
+          <li>Chất lượng</li>
+          <li>Sáng tạo</li>
+          <li>Hợp tác</li>
+          <li>Học hỏi</li>
+          <li>Trách nhiệm</li>
         </ul>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <small>&copy; 2025 TayDuKy</small>
       </div>
+    </footer>
 
-      <h2>Công nghệ sử dụng</h2>
-      <div class="content-box">
-        <ul>
-          <li>HTML5, CSS3 (CSS variables, responsive grid)</li>
-          <li>JavaScript thuần (mobile menu)</li>
-          <li>Hosting: Vercel</li>
-        </ul>
-      </div>
-
-      <h2>Thành tựu</h2>
-      <div class="content-box">
-        <ul>
-          <li>Hoàn thiện website giới thiệu nhóm (responsive)</li>
-          <li>Triển khai public host tại Vercel</li>
-          <li>Cải thiện quy trình làm việc nhóm và tiêu chuẩn code</li>
-        </ul>
-      </div>
-
-      <h2>Liên hệ</h2>
-      <p>Email: <a href="mailto:ga01.team@example.com">ga01.team@example.com</a></p>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-  <small>&copy; 2025 Tây Du Ký</small>
-    </div>
-  </footer>
-
-  <script src="js/script.js"></script>
-</body>
+    <script src="js/script.js"></script>
+  </body>
 </html>
