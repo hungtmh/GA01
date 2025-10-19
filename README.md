@@ -6,21 +6,9 @@ This is a simple, responsive website introducing the GA01 group and its members.
 
 ## Quick start
 
-Option A – Open locally (no server required):
+Open locally (no server required):
 - Download or clone the repository
 - Open `index.html` in your browser
-
-Option B – Run with a local static server (optional):
-
-```powershell
-# Python 3 built‑in HTTP server
-python -m http.server 8080
-
-# or with Node.js (requires npm)
-npx serve . -l 8080
-```
-
-Then visit http://localhost:8080
 
 ## Project structure
 
