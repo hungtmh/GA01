@@ -1,0 +1,84 @@
+/* --- CSS cho Trang Liên hệ Thành viên --- */
+
+/* Grid layout cho các card */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 cột */
+  gap: 16px;
+  margin-bottom: 24px; /* Khoảng cách với section "Thông tin chung" */
+}
+
+/* Từng card liên hệ */
+.contact-card {
+  background: var(--card); /* Dùng màu card có sẵn */
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header của card (avatar + tên) */
+.contact-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+/* Avatar thu nhỏ */
+.avatar-small {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+}
+
+.contact-card-header h3 {
+  margin: 0;
+  color: var(--text);
+}
+
+.contact-card-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Danh sách link liên hệ */
+.contact-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.contact-links li {
+  margin-bottom: 8px;
+  color: var(--muted); /* Chữ "Email:", "GitHub:" sẽ có màu này */
+  word-wrap: break-word; /* Đảm bảo email dài không bị tràn */
+}
+
+/* Ghi đè style link chung để link trong card đẹp hơn */
+.contact-links li a:link,
+.contact-links li a:visited {
+  color: var(--primary);
+  text-decoration: none; /* Bỏ gạch chân mặc định của link global */
+}
+
+.contact-links li a:hover {
+  color: var(--primary-600);
+  text-decoration: underline; /* Thêm gạch chân khi hover */
+}
+
+/* --- Responsive cho Contact Grid --- */
+/* Thêm vào @media (max-width: 980px) trong file style.css chính */
+/* Hoặc đặt riêng ở đây nếu đây là file riêng */
+@media (max-width: 980px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
