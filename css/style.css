@@ -16,16 +16,22 @@
 * {
   box-sizing: border-box;
 }
-html,
+html {
+  height: 100%;
+}
 body {
   margin: 0;
   padding: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
   background: var(--bg);
   color: var(--text);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
     "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   line-height: 1.6;
 }
+
 img {
   max-width: 100%;
   display: block;
@@ -130,21 +136,52 @@ a:focus-visible {
 
 /* Layout */
 .layout {
+  flex: 1;
   display: grid;
   grid-template-columns: 260px 1fr;
   gap: 20px;
   padding: 20px;
+
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  align-items: start;
 }
 .sidebar {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 16px;
+  min-height: calc(100vh - 200px);
+  height: 100%;
 }
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 5px;
+  margin-bottom: 3px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.value {
+  word-wrap: break-word;
+}
+
 .sidebar h3 {
   margin-top: 0;
 }
 .content {
+  flex: 1;
   background: transparent;
 }
 
@@ -261,10 +298,15 @@ a:focus-visible {
 /* Footer */
 .site-footer {
   border-top: 1px solid var(--border);
-  margin-top: 24px;
+  margin-top: auto;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .site-footer .container {
   padding: 16px;
+  width: 100%;
 }
 
 /* Responsive */
