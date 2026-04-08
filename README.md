@@ -1,644 +1,81 @@
-# 📸 Photo Album App - Ứng dụng Album Ảnh
+# Bộ Câu Hỏi Phỏng Vấn & Gợi Ý Trả Lời (Food Delivery App)
 
-Ứng dụng quản lý ảnh đơn giản cho Android, được viết bằng **Java** và **XML**.
-
----
-
-## 📋 Mục lục
-
-1. [Tổng quan kiến trúc](#-tổng-quan-kiến-trúc)
-2. [Cấu trúc thư mục](#-cấu-trúc-thư-mục)
-3. [Giải thích chi tiết từng thành phần](#-giải-thích-chi-tiết-từng-thành-phần)
-   - [Model - Photo.java](#1-model---photojava)
-   - [Adapter - PhotoAdapter.java](#2-adapter---photoadapterjava)
-   - [MainActivity.java](#3-mainactivityjava)
-4. [Các file XML Layout](#-các-file-xml-layout)
-5. [Luồng hoạt động của ứng dụng](#-luồng-hoạt-động-của-ứng-dụng)
-6. [Sơ đồ tương tác](#-sơ-đồ-tương-tác)
+Dựa trên CV của bạn, dưới đây là danh sách các câu hỏi phỏng vấn mô phỏng (Mock Interview) được phân loại theo từng tính năng và vai trò, kèm theo gợi ý trả lời chi tiết. Việc bám sát các luồng logic thực tế của dự án sẽ giúp bạn ghi điểm tuyệt đối.
 
 ---
 
-## 🏗 Tổng quan kiến trúc
+## 🏗️ 1. Quản Lý & Kiến Trúc Dự Án (Leadership & Architecture)
 
-Ứng dụng sử dụng mô hình **MVC (Model-View-Controller)** đơn giản:
+**Câu hỏi 1: Bạn đã lead một team 5 người trong dự án này. Hãy kể về cách bạn phân chia công việc, quản lý tiến độ và xử lý xung đột code (conflict)?**
+*   **Trả lời:** 
+    *   *Quản lý công việc:* Em áp dụng Agile/Scrum cơ bản, chia task theo tính năng (Frontend UI, Backend logic, AI, Payments). Mỗi tuần có báo cáo tiến độ rõ ràng (như báo cáo tuần 9).
+    *   *Quản lý source code:* Team dùng Git. Mỗi tính năng mới được làm trên một branch riêng (ví dụ: `Thang`, `Khoa`, `NVK`).
+    *   *Xử lý conflict:* Khi có chức năng lớn merge vào `main`, em là người trực tiếp review code và resolve conflicts (như lần xử lý xung đột AndroidManifest.xml và các file config), đảm bảo không ghi đè tính năng của nhau, luôn pull code mới nhất về trước khi push.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        VIEW (XML)                           │
-│  ┌─────────────────┐  ┌─────────────┐  ┌─────────────────┐ │
-│  │ activity_main   │  │ item_photo  │  │ item_photo      │ │
-│  │     .xml        │  │ _grid.xml   │  │ _list.xml       │ │
-│  └────────┬────────┘  └──────┬──────┘  └────────┬────────┘ │
-└───────────┼──────────────────┼──────────────────┼──────────┘
-            │                  │                  │
-            ▼                  ▼                  ▼
-┌─────────────────────────────────────────────────────────────┐
-│                    CONTROLLER (Java)                        │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │                  MainActivity.java                   │   │
-│  │  - Xử lý sự kiện người dùng                         │   │
-│  │  - Điều khiển camera, permissions                   │   │
-│  │  - Quản lý RecyclerView                             │   │
-│  └──────────────────────┬──────────────────────────────┘   │
-│                         │                                   │
-│  ┌──────────────────────▼──────────────────────────────┐   │
-│  │                 PhotoAdapter.java                    │   │
-│  │  - Kết nối dữ liệu với giao diện                    │   │
-│  │  - Xử lý hiển thị Grid/List view                    │   │
-│  │  - Sắp xếp dữ liệu                                  │   │
-│  └──────────────────────┬──────────────────────────────┘   │
-└─────────────────────────┼───────────────────────────────────┘
-                          │
-                          ▼
-┌─────────────────────────────────────────────────────────────┐
-│                      MODEL (Java)                           │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │                    Photo.java                        │   │
-│  │  - Lưu trữ thông tin của một ảnh                    │   │
-│  │  - id, name, path, dateAdded, size, width, height   │   │
-│  └─────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
-```
+**Câu hỏi 2: Tại sao team lại chọn hệ sinh thái Supabase kết hợp với Java/XML (Native Android) thay vì dùng Firebase hay các framework Cross-platform như Flutter/React Native?**
+*   **Trả lời:** 
+    *   Về Native (Java/XML): Team hướng tới việc tối ưu hiệu suất trên thiết bị di động, nắm vững vòng đời (Lifecycle) của Android và tận dụng tối đa phần cứng (Camera up ảnh review, Location).
+    *   Về Supabase: Nó cung cấp cơ sở dữ liệu quan hệ mạnh mẽ (PostgreSQL) rất phù hợp cho ứng dụng E-commerce (ràng buộc quan hệ User - Order - Product - Category - Review) so với NoSQL của Firebase. Hơn nữa Supabase hỗ trợ Realtime, Storage, và Auth rất đầy đủ với chi phí tối ưu.
 
 ---
 
-## 📁 Cấu trúc thư mục
+## 🛒 2. Quản Lý Đơn Hàng & State Machine (Order Management)
 
-```
-app/src/main/
-├── java/com/example/photoalbumapp/
-│   ├── MainActivity.java          # Activity chính
-│   ├── adapter/
-│   │   └── PhotoAdapter.java      # Adapter cho RecyclerView
-│   └── model/
-│       └── Photo.java             # Model đại diện cho ảnh
-│
-└── res/
-    ├── layout/
-    │   ├── activity_main.xml      # Layout màn hình chính
-    │   ├── item_photo_grid.xml    # Layout item dạng lưới
-    │   └── item_photo_list.xml    # Layout item dạng danh sách
-    ├── drawable/
-    │   ├── ic_camera.xml          # Icon camera
-    │   ├── ic_view_grid.xml       # Icon chế độ lưới
-    │   ├── ic_view_list.xml       # Icon chế độ danh sách
-    │   ├── ic_sort_ascending.xml  # Icon sắp xếp tăng
-    │   ├── ic_sort_descending.xml # Icon sắp xếp giảm
-    │   └── ...
-    ├── values/
-    │   ├── strings.xml            # Chuỗi văn bản
-    │   ├── colors.xml             # Màu sắc
-    │   └── dimens.xml             # Kích thước
-    └── xml/
-        └── file_paths.xml         # Cấu hình FileProvider
-```
+**Câu hỏi 3: Trong CV em ghi có làm luồng "Dine-in" và "Delivery". Business logic của hai luồng này trong code và database khác nhau như thế nào?**
+*   **Trả lời:** 
+    *   *Với Delivery (Giao hàng):* Flow trạng thái sẽ đi qua 5 bước: `Chờ xác nhận -> Chờ chế biến -> Đang giao -> Đã phục vụ -> Hoàn thành/Đã hủy`. UI sẽ bắt buộc người dùng chọn địa chỉ tĩnh.
+    *   *Với Dine-in (Ăn tại quán):* Em đã can thiệp vào logic State Machine để bỏ qua bước "Đang giao". Đơn hàng sẽ đi từ `Chờ chế biến -> Đã phục vụ`. Thay vì địa chỉ, khách chỉ cần nhập "Số bàn", và hệ thống tự động thiết lập giả lập địa chỉ bằng số bàn đó để bypass validation.
+
+**Câu hỏi 4: Ứng dụng của bạn cập nhật realtime tiến độ đơn hàng như thế nào? Điều gì xảy ra nếu mạng của user bị chập chờn?**
+*   **Trả lời:** 
+    *   *Triển khai:* Em sử dụng tính năng **Supabase Realtime** (lắng nghe các thay đổi trên bảng `Orders`). Khi có bảng ghi nào thay đổi cột `status`, callback ở client-side lập tức được trigger để update dòng UI thông qua `runOnUiThread()`.
+    *   *Xử lý rớt mạng:* Khi rớt mạng, Supabase SDK client sẽ cố gắng reconnect. Em xử lý thêm logic lấy lại (fetch-logic) trạng thái mới nhất từ database vào lúc `onResume()` của Activity/Fragment để tránh việc mất hook realtime khi kết nối lại.
 
 ---
 
-## 📖 Giải thích chi tiết từng thành phần
+## 📍 3. Checkout Flow & Dynamic Address (Luồng thanh toán)
 
-### 1. Model - Photo.java
+**Câu hỏi 5: Em đã implement chức năng chọn "Tỉnh/Thành, Quận/Huyện, Phường/Xã" sử dụng Spinners như thế nào? Dữ liệu này được load từ đâu?**
+*   **Trả lời:** 
+    *   Em băm tách (decouple) việc lưu địa chỉ tĩnh trong Profile ra để có thể linh hoạt chọn lúc checkout. 
+    *   Giao diện dùng 3 Spinners (Tỉnh - Huyện - Xã) dạng cascading (Spinner 2 phụ thuộc vào ID của Spinner 1). Sự kiện `onItemSelectedListener` của Tỉnh sẽ gọi API hoặc load data JSON cục bộ để render danh sách Huyện tương ứng.
+    *   Để tránh lag UI, quá trình parse JSON được em thực hiện ở Background Thread (ví dụ: dùng ExecutorService hoặc RxJava/Coroutines nếu có dùng chung với Kotlin), sau đó đẩy dữ liệu lên qua UI Thread.
 
-#### **Model là gì?**
-Model là lớp đại diện cho dữ liệu trong ứng dụng. Nó chứa các thuộc tính và phương thức liên quan đến một đối tượng cụ thể.
-
-#### **Photo.java làm gì?**
-Lớp `Photo` đại diện cho **một bức ảnh** trong album, lưu trữ tất cả thông tin cần thiết:
-
-```java
-public class Photo implements Serializable {
-    private long id;           // ID duy nhất từ MediaStore
-    private String name;       // Tên file (VD: IMG_20260125_143052.jpg)
-    private String path;       // Đường dẫn đầy đủ đến file ảnh
-    private long dateAdded;    // Thời gian thêm ảnh (Unix timestamp)
-    private long size;         // Kích thước file (bytes)
-    private int width;         // Chiều rộng ảnh (pixels)
-    private int height;        // Chiều cao ảnh (pixels)
-}
-```
-
-#### **Các phương thức quan trọng:**
-
-| Phương thức | Mô tả |
-|-------------|-------|
-| `getFormattedSize()` | Chuyển đổi size từ bytes sang KB/MB/GB dễ đọc |
-| `exists()` | Kiểm tra file ảnh có tồn tại không |
-| Getters/Setters | Truy cập và thay đổi các thuộc tính |
-
-```java
-// Ví dụ sử dụng
-Photo photo = new Photo(1, "anh.jpg", "/storage/Pictures/anh.jpg", 1706185200, 2500000);
-String size = photo.getFormattedSize(); // "2.4 MB"
-boolean exists = photo.exists();        // true/false
-```
+**Câu hỏi 6: Em đã tích hợp thanh toán SEPay như thế nào vào luồng Checkout?**
+*   **Trả lời:** 
+    *   Khi user chọn thanh toán chuyển khoản, app sẽ render một mã QR động chứa số tài khoản, số tiền và nội dung chuyển khoản được generate ngẫu nhiên khớp với `Order_ID`.
+    *   Bên phía Supabase, em sử dụng Edge Functions (hoặc Webhooks) để lắng nghe callback từ SEPay gửi về. Khi webhook nhận thông tin "đã thanh toán đủ", nó cập nhật bảng `Orders` (chuyển trạng thái thanh toán là `PAID`), thông qua Supabase Realtime, ứng dụng tự động nhảy sang màn hình Success mà user không cần làm gì thêm.
 
 ---
 
-### 2. Adapter - PhotoAdapter.java
+## 💬 4. Real-time Chat Module (Tính năng Chat)
 
-#### **Adapter là gì?**
-Adapter là **cầu nối** giữa dữ liệu (List<Photo>) và giao diện (RecyclerView). Nó có nhiệm vụ:
-- Tạo các View item từ layout XML
-- Gán dữ liệu từ Photo vào các View
-- Xử lý sự kiện click trên từng item
-
-#### **Tại sao cần Adapter?**
-RecyclerView không biết cách hiển thị dữ liệu. Adapter "dạy" RecyclerView cách:
-1. Tạo bao nhiêu item
-2. Mỗi item trông như thế nào
-3. Dữ liệu nào hiển thị ở đâu
-
-```
-┌──────────────────────────────────────────────────────────┐
-│                     RecyclerView                          │
-│  ┌─────────────────────────────────────────────────────┐ │
-│  │  "Tôi cần hiển thị danh sách, nhưng không biết      │ │
-│  │   dữ liệu trông như thế nào!"                       │ │
-│  └───────────────────────┬─────────────────────────────┘ │
-└──────────────────────────┼───────────────────────────────┘
-                           │
-                           ▼
-┌──────────────────────────────────────────────────────────┐
-│                      PhotoAdapter                         │
-│  ┌─────────────────────────────────────────────────────┐ │
-│  │  "Để tôi giúp! Đây là cách hiển thị từng Photo:"    │ │
-│  │  1. Có 25 ảnh cần hiển thị (getItemCount)           │ │
-│  │  2. Dùng layout item_photo_grid.xml (onCreateView)  │ │
-│  │  3. Ảnh này tên "abc.jpg", hiển thị ở đây (onBind)  │ │
-│  └─────────────────────────────────────────────────────┘ │
-└──────────────────────────────────────────────────────────┘
-```
-
-#### **Cấu trúc PhotoAdapter:**
-
-```java
-public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder> {
-    
-    // Hằng số cho loại view
-    public static final int VIEW_TYPE_GRID = 0;  // Chế độ lưới
-    public static final int VIEW_TYPE_LIST = 1;  // Chế độ danh sách
-    
-    // Hằng số cho kiểu sắp xếp
-    public static final int SORT_BY_NAME = 0;
-    public static final int SORT_BY_DATE = 1;
-    public static final int SORT_BY_SIZE = 2;
-    
-    private List<Photo> photoList;     // Danh sách ảnh
-    private int viewType;              // Loại view hiện tại
-    private int currentSortType;       // Kiểu sắp xếp hiện tại
-    private boolean sortAscending;     // Thứ tự sắp xếp
-}
-```
-
-#### **3 phương thức BẮT BUỘC của Adapter:**
-
-```java
-// 1. onCreateViewHolder - Tạo ViewHolder mới
-@Override
-public PhotoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    // Chọn layout dựa vào viewType (grid hoặc list)
-    int layoutRes = (viewType == VIEW_TYPE_LIST) 
-            ? R.layout.item_photo_list 
-            : R.layout.item_photo_grid;
-    View view = LayoutInflater.from(context).inflate(layoutRes, parent, false);
-    return new PhotoViewHolder(view, viewType);
-}
-
-// 2. onBindViewHolder - Gán dữ liệu vào ViewHolder
-@Override
-public void onBindViewHolder(PhotoViewHolder holder, int position) {
-    Photo photo = photoList.get(position);
-    holder.bind(photo, position);  // Gán ảnh vào ImageView, tên vào TextView
-}
-
-// 3. getItemCount - Trả về số lượng item
-@Override
-public int getItemCount() {
-    return photoList.size();
-}
-```
-
-#### **ViewHolder là gì?**
-ViewHolder giữ tham chiếu đến các View trong một item, tránh việc `findViewById()` nhiều lần (tốn hiệu năng):
-
-```java
-class PhotoViewHolder extends RecyclerView.ViewHolder {
-    ImageView imageView;    // Hiển thị ảnh
-    TextView tvName;        // Hiển thị tên
-    TextView tvInfo;        // Hiển thị thông tin (ngày, kích thước)
-    
-    public void bind(Photo photo, int position) {
-        // Load ảnh bằng Glide
-        Glide.with(context)
-            .load(new File(photo.getPath()))
-            .centerCrop()
-            .into(imageView);
-        
-        // Set tên
-        tvName.setText(photo.getName());
-        
-        // Set thông tin (chỉ cho list view)
-        if (tvInfo != null) {
-            tvInfo.setText(photo.getFormattedSize());
-        }
-    }
-}
-```
-
-#### **Chức năng sắp xếp:**
-
-```java
-private void sortPhotos() {
-    Comparator<Photo> comparator;
-    
-    switch (currentSortType) {
-        case SORT_BY_NAME:
-            // So sánh theo tên (không phân biệt hoa thường)
-            comparator = (p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName());
-            break;
-        case SORT_BY_SIZE:
-            // So sánh theo kích thước
-            comparator = Comparator.comparingLong(Photo::getSize);
-            break;
-        case SORT_BY_DATE:
-        default:
-            // So sánh theo ngày
-            comparator = Comparator.comparingLong(Photo::getDateAdded);
-            break;
-    }
-    
-    // Đảo ngược nếu sắp xếp giảm dần
-    if (!sortAscending) {
-        comparator = comparator.reversed();
-    }
-    
-    Collections.sort(photoList, comparator);
-}
-```
+**Câu hỏi 7: Module Chat Real-time giữa khách và admin được xây dựng thế nào? Làm sao đảm bảo hiệu năng khi danh sách tin nhắn quá dài?**
+*   **Trả lời:** 
+    *   Mỗi đơn hàng hoặc mỗi User sẽ có một `room_id` riêng trong database. Em theo dõi table `chat_messages` bằng Supabase Realtime.
+    *   Về cấu trúc UI: Em dùng `RecyclerView` trong Android. Khi có tin nhắn mới, em không `notifyDataSetChanged()` toàn bộ list mà chỉ gọi `adapter.notifyItemInserted()` ở phần tử cuối cùng và scroll mượt xuống đáy.
+    *   Để tối ưu load, em áp dụng cơ chế Pagination (phân trang), chỉ load 20-30 tin nhắn cũ nhất, khi User kéo lên trên đỉnh RecyclerView (dùng `addOnScrollListener`) thì mới fetch tiếp dữ liệu lịch sử.
 
 ---
 
-### 3. MainActivity.java
+## ⭐ 5. Review & Rating (Đánh giá)
 
-#### **MainActivity làm gì?**
-Đây là "bộ não" của ứng dụng, điều khiển mọi thứ:
+**Câu hỏi 8: Em xử lý việc người dùng upload "Nhiều hình ảnh (multi-image uploads)" trong phần Review như thế nào?**
+*   **Trả lời:** 
+    *   *Phía Client:* Em dùng API mới `ActivityResultContracts.GetMultipleContents()` của Android để mở thư viện, cho phép user pick nhiều ảnh cùng lúc, hiển thị thumbnail trên một RecyclerView nằm ngang. Trước khi up, em resize/compress bitmap để giảm dung lượng file.
+    *   *Tiến trình Upload:* Vì upload nhiều file có thể gián đoạn, em duyệt mảng URI ảnh và đẩy bất đồng bộ (Async) lên Supabase Storage bucket. Em gom các `URL` kết quả lại thành một mảng (JSON array hoặc String list).
+    *   *Transaction lưu Review:* Sau khi upload xong lấy được list URLs, em mới tiến hành `INSERT` bản ghi vào bảng `Reviews`. 
 
-```java
-public class MainActivity extends AppCompatActivity 
-        implements PhotoAdapter.OnPhotoClickListener {
-    
-    // === CÁC THÀNH PHẦN GIAO DIỆN ===
-    private RecyclerView recyclerViewPhotos;  // Hiển thị danh sách ảnh
-    private PhotoAdapter photoAdapter;         // Adapter kết nối dữ liệu
-    private FloatingActionButton fabCamera;    // Nút chụp ảnh
-    private Spinner spinnerSort;               // Dropdown chọn kiểu sắp xếp
-    private ImageButton btnToggleView;         // Nút chuyển Grid/List
-    private ImageButton btnSortOrder;          // Nút đảo thứ tự sắp xếp
-}
-```
-
-#### **Các chức năng chính:**
-
-| Chức năng | Phương thức | Mô tả |
-|-----------|-------------|-------|
-| Khởi tạo | `onCreate()` | Setup giao diện, adapter, listeners |
-| Load ảnh | `loadPhotos()` | Đọc ảnh từ MediaStore |
-| Chụp ảnh | `takePhoto()` | Mở camera, lưu ảnh |
-| Chuyển view | `toggleView()` | Grid ↔ List |
-| Sắp xếp | `toggleSortOrder()` | Tăng ↔ Giảm |
-| Xóa ảnh | `deletePhoto()` | Xóa ảnh khỏi thiết bị |
-
-#### **Cách load ảnh từ thiết bị:**
-
-```java
-private void loadPhotos() {
-    List<Photo> photos = new ArrayList<>();
-    
-    // Truy vấn MediaStore (cơ sở dữ liệu ảnh của Android)
-    String[] projection = {
-        MediaStore.Images.Media._ID,
-        MediaStore.Images.Media.DISPLAY_NAME,
-        MediaStore.Images.Media.DATA,
-        MediaStore.Images.Media.DATE_ADDED,
-        MediaStore.Images.Media.SIZE
-    };
-    
-    Cursor cursor = getContentResolver().query(
-        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,  // URI của thư viện ảnh
-        projection,  // Các cột cần lấy
-        null,        // Không filter
-        null,
-        "DATE_ADDED DESC"  // Sắp xếp mới nhất trước
-    );
-    
-    // Duyệt qua kết quả và tạo Photo objects
-    while (cursor.moveToNext()) {
-        Photo photo = new Photo(
-            cursor.getLong(idColumn),
-            cursor.getString(nameColumn),
-            cursor.getString(pathColumn),
-            cursor.getLong(dateColumn),
-            cursor.getLong(sizeColumn)
-        );
-        photos.add(photo);
-    }
-    
-    // Cập nhật adapter
-    photoAdapter.setPhotos(photos);
-}
-```
-
-#### **Cách chụp và lưu ảnh:**
-
-```java
-private void takePhoto() {
-    // 1. Tạo URI để lưu ảnh
-    Uri photoUri = createImageUri();
-    
-    // 2. Tạo intent mở camera
-    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-    intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
-    
-    // 3. Mở camera
-    takePictureLauncher.launch(intent);
-}
-
-private Uri createImageUri() {
-    // Tạo tên file với timestamp
-    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-    String fileName = "IMG_" + timeStamp + ".jpg";
-    
-    // Tạo entry trong MediaStore
-    ContentValues values = new ContentValues();
-    values.put(MediaStore.Images.Media.DISPLAY_NAME, fileName);
-    values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-    values.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/PhotoAlbum");
-    
-    return getContentResolver().insert(
-        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, 
-        values
-    );
-}
-```
+**Câu hỏi 9: Chức năng "Tự động tính toán số sao trung bình (dynamically calculating average rating)" được em thực hiện ở Frontend hay Backend? Tại sao?**
+*   **Trả lời:** 
+    *   Em thực hiện ở phía **Backend / Database** là tối ưu nhất. Thay vì bắt client loop qua tất cả review để tính trung bình cộng (gây nặng máy, sai lệch nếu data lớn), em dùng **Database Triggers** (hoặc RPC/View trong PostgreSQL). 
+    *   Quy trình: Mỗi khi có thao tác `INSERT` hoặc `UPDATE` vào bảng `Reviews`, một Trigger sẽ tự động đếm tổng số review và chia trung bình số sao cho sản phẩm đó, rồi cập nhật ngược lại cột `average_rating` nằm trong bảng `Products`. Client chỉ việc fetch cột này về để hiển thị một cách nhẹ bén.
 
 ---
 
-## 🎨 Các file XML Layout
+## 🤖 6. AI Integration (Câu hỏi thưởng / Mở rộng)
 
-### 1. activity_main.xml - Layout màn hình chính
-
-```
-┌─────────────────────────────────────────────────────────┐
-│  ┌─────────────────────────────────────────────────┐   │
-│  │              MaterialToolbar                     │   │
-│  │              "Photo Album"                       │   │
-│  └─────────────────────────────────────────────────┘   │
-│                                                         │
-│  ┌─────────────────────────────────────────────────┐   │
-│  │ Sắp xếp: [Spinner ▼]  [↑↓]     [Grid] | 25 ảnh │   │ ← Controls
-│  └─────────────────────────────────────────────────┘   │
-│                                                         │
-│  ┌─────────────────────────────────────────────────┐   │
-│  │ ┌─────┐ ┌─────┐ ┌─────┐                         │   │
-│  │ │ 📷  │ │ 📷  │ │ 📷  │                         │   │
-│  │ └─────┘ └─────┘ └─────┘                         │   │
-│  │ ┌─────┐ ┌─────┐ ┌─────┐      RecyclerView       │   │
-│  │ │ 📷  │ │ 📷  │ │ 📷  │                         │   │
-│  │ └─────┘ └─────┘ └─────┘                         │   │
-│  │ ┌─────┐ ┌─────┐ ┌─────┐                         │   │
-│  │ │ 📷  │ │ 📷  │ │ 📷  │                         │   │
-│  │ └─────┘ └─────┘ └─────┘                         │   │
-│  └─────────────────────────────────────────────────┘   │
-│                                                         │
-│                                            ┌───────┐   │
-│                                            │  📸   │   │ ← FAB Camera
-│                                            └───────┘   │
-└─────────────────────────────────────────────────────────┘
-```
-
-**Cấu trúc XML:**
-```xml
-<CoordinatorLayout>                    <!-- Container chính -->
-    <AppBarLayout>                     <!-- Thanh tiêu đề -->
-        <MaterialToolbar/>
-    </AppBarLayout>
-    
-    <LinearLayout>                     <!-- Nội dung chính -->
-        <LinearLayout/>                <!-- Controls: Spinner, buttons -->
-        <LinearLayout/>                <!-- Empty view (khi không có ảnh) -->
-        <RecyclerView/>                <!-- Danh sách ảnh -->
-    </LinearLayout>
-    
-    <FloatingActionButton/>            <!-- Nút chụp ảnh -->
-</CoordinatorLayout>
-```
-
-### 2. item_photo_grid.xml - Layout item dạng lưới
-
-```
-┌─────────────────────┐
-│                     │
-│      ImageView      │
-│      (150dp)        │
-│                     │
-├─────────────────────┤
-│ ▓▓▓ Gradient ▓▓▓▓▓▓ │  ← Gradient trong suốt → đen
-│ IMG_20260125.jpg    │  ← Tên file (màu trắng)
-└─────────────────────┘
-```
-
-```xml
-<MaterialCardView>
-    <FrameLayout>
-        <ImageView                     <!-- Ảnh thumbnail -->
-            android:id="@+id/ivPhoto"
-            android:layout_height="150dp"
-            android:scaleType="centerCrop"/>
-            
-        <TextView                      <!-- Tên file -->
-            android:id="@+id/tvPhotoName"
-            android:background="@drawable/gradient_bottom"
-            android:textColor="@color/white"/>
-    </FrameLayout>
-</MaterialCardView>
-```
-
-### 3. item_photo_list.xml - Layout item dạng danh sách
-
-```
-┌─────────────────────────────────────────────────────────┐
-│ ┌──────────┐                                            │
-│ │          │  IMG_20260125_143052.jpg      ← Tên file   │
-│ │ ImageView│  25/01/2026 14:30 • 2.5 MB    ← Thông tin  │
-│ │  (80dp)  │                                        >   │
-│ └──────────┘                                            │
-└─────────────────────────────────────────────────────────┘
-```
-
-```xml
-<MaterialCardView>
-    <LinearLayout android:orientation="horizontal">
-        
-        <MaterialCardView>             <!-- Container cho ảnh -->
-            <ImageView                 <!-- Ảnh thumbnail nhỏ -->
-                android:id="@+id/ivPhoto"
-                android:layout_width="80dp"
-                android:layout_height="80dp"/>
-        </MaterialCardView>
-        
-        <LinearLayout>                 <!-- Thông tin -->
-            <TextView                  <!-- Tên file -->
-                android:id="@+id/tvPhotoName"/>
-            <TextView                  <!-- Ngày + kích thước -->
-                android:id="@+id/tvPhotoInfo"/>
-        </LinearLayout>
-        
-        <ImageView/>                   <!-- Icon mũi tên > -->
-        
-    </LinearLayout>
-</MaterialCardView>
-```
-
----
-
-## 🔄 Luồng hoạt động của ứng dụng
-
-### Luồng 1: Khởi động ứng dụng
-
-```
-┌─────────────┐     ┌──────────────┐     ┌─────────────┐     ┌──────────────┐
-│   onCreate  │ ──► │  initViews   │ ──► │  Check      │ ──► │  loadPhotos  │
-│             │     │              │     │  Permissions│     │              │
-└─────────────┘     └──────────────┘     └─────────────┘     └──────────────┘
-                                                                    │
-                    ┌──────────────┐     ┌─────────────┐            │
-                    │   updateUI   │ ◄── │  setPhotos  │ ◄──────────┘
-                    │              │     │  (adapter)  │
-                    └──────────────┘     └─────────────┘
-```
-
-### Luồng 2: Chụp ảnh
-
-```
-┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│  Nhấn FAB   │ ──► │  takePhoto   │ ──► │ Mở Camera  │
-│   Camera    │     │              │     │   App       │
-└─────────────┘     └──────────────┘     └─────────────┘
-                                                │
-                                                ▼
-┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│   updateUI  │ ◄── │  loadPhotos  │ ◄── │ Chụp xong  │
-│             │     │              │     │ RESULT_OK   │
-└─────────────┘     └──────────────┘     └─────────────┘
-```
-
-### Luồng 3: Chuyển đổi Grid/List view
-
-```
-┌─────────────────┐     ┌───────────────────┐     ┌─────────────────────┐
-│  Nhấn nút       │ ──► │  toggleView()     │ ──► │ adapter.toggleView  │
-│  Toggle View    │     │                   │     │ Type()              │
-└─────────────────┘     └───────────────────┘     └──────────┬──────────┘
-                                                             │
-        ┌────────────────────────────────────────────────────┘
-        ▼
-┌───────────────────┐     ┌───────────────────────┐
-│  Thay đổi         │ ──► │  notifyDataSetChanged │
-│  LayoutManager    │     │  ()                   │
-│  (Grid ↔ Linear)  │     │  RecyclerView refresh │
-└───────────────────┘     └───────────────────────┘
-```
-
-### Luồng 4: Sắp xếp ảnh
-
-```
-┌─────────────────┐     ┌───────────────────┐     ┌─────────────────────┐
-│  Chọn Spinner   │ ──► │  onItemSelected   │ ──► │ adapter.setSortType │
-│  (Tên/Ngày/Size)│     │                   │     │                     │
-└─────────────────┘     └───────────────────┘     └──────────┬──────────┘
-                                                             │
-        ┌────────────────────────────────────────────────────┘
-        ▼
-┌───────────────────┐     ┌───────────────────────┐
-│  sortPhotos()     │ ──► │  Collections.sort     │
-│  (tạo Comparator) │     │  + notifyDataChanged  │
-└───────────────────┘     └───────────────────────┘
-```
-
----
-
-## 🔗 Sơ đồ tương tác
-
-### Quan hệ giữa các thành phần
-
-```
-                         ┌─────────────────────────────┐
-                         │        MediaStore           │
-                         │   (Cơ sở dữ liệu ảnh)       │
-                         └──────────────┬──────────────┘
-                                        │ query/insert/delete
-                                        ▼
-┌──────────────────────────────────────────────────────────────────────────┐
-│                            MainActivity                                   │
-│  ┌────────────────────────────────────────────────────────────────────┐ │
-│  │                         Lifecycle Methods                           │ │
-│  │  onCreate() → onResume() → onPause() → onDestroy()                 │ │
-│  └────────────────────────────────────────────────────────────────────┘ │
-│                                    │                                     │
-│          ┌─────────────────────────┼─────────────────────────┐          │
-│          ▼                         ▼                         ▼          │
-│  ┌───────────────┐      ┌──────────────────┐      ┌──────────────────┐ │
-│  │   Controls    │      │   RecyclerView   │      │   FAB Camera     │ │
-│  │ ┌───────────┐ │      │                  │      │                  │ │
-│  │ │  Spinner  │ │      │  ┌────────────┐  │      │  ┌────────────┐  │ │
-│  │ └─────┬─────┘ │      │  │  Adapter   │  │      │  │ takePhoto  │  │ │
-│  │       │       │      │  │  ┌──────┐  │  │      │  │    ()      │  │ │
-│  │ ┌─────▼─────┐ │      │  │  │Photo │  │  │      │  └────────────┘  │ │
-│  │ │ setSortType│─┼──────┼──►  │List  │  │  │      │                  │ │
-│  │ └───────────┘ │      │  │  └──────┘  │  │      │                  │ │
-│  │               │      │  └────────────┘  │      │                  │ │
-│  │ ┌───────────┐ │      │                  │      │                  │ │
-│  │ │ToggleView │─┼──────┼──► setViewType() │      │                  │ │
-│  │ └───────────┘ │      │                  │      │                  │ │
-│  └───────────────┘      └──────────────────┘      └──────────────────┘ │
-└──────────────────────────────────────────────────────────────────────────┘
-                                    │
-                                    │ inflate
-                                    ▼
-              ┌─────────────────────────────────────────┐
-              │              XML Layouts                 │
-              │  ┌─────────────┐  ┌─────────────────┐   │
-              │  │ item_photo  │  │ item_photo_list │   │
-              │  │ _grid.xml   │  │      .xml       │   │
-              │  └─────────────┘  └─────────────────┘   │
-              └─────────────────────────────────────────┘
-```
-
----
-
-## 🎯 Tổng kết
-
-| Thành phần | Vai trò | Tương tác với |
-|------------|---------|---------------|
-| **Photo (Model)** | Lưu trữ dữ liệu ảnh | PhotoAdapter |
-| **PhotoAdapter** | Kết nối dữ liệu ↔ UI | Photo, RecyclerView, XML layouts |
-| **MainActivity** | Điều khiển luồng | Adapter, MediaStore, Camera |
-| **activity_main.xml** | Giao diện chính | MainActivity |
-| **item_photo_*.xml** | Giao diện từng item | PhotoAdapter (ViewHolder) |
-| **Drawable icons** | Hình ảnh/icon | XML layouts |
-| **strings.xml** | Văn bản đa ngôn ngữ | Tất cả layouts |
-| **colors.xml** | Màu sắc | Tất cả layouts |
-
----
-
-## 📱 Chạy ứng dụng
-
-1. Mở project trong Android Studio
-2. Sync Gradle
-3. Chạy trên thiết bị/emulator (API 30+)
-4. Cấp quyền Camera và Storage
-5. Nhấn nút camera để chụp ảnh mới!
-
----
-
-*Được tạo bởi GitHub Copilot - Tháng 1/2026*
+**Câu hỏi 10: Trong CV em không nhắc nhiều đến AI nhưng có ghi "with AI integration". Thực tế em đã dùng AI cho phần nào của app?**
+*   **Trả lời:** 
+    *   *(Dựa vào thực tế project)* Em đã ứng dụng AI (Gemini / chuyển sang Qwen & Hugging Face) để phân tích "Sentiment" từ những bài feedback review của khách hàng.
+    *   Bên cạnh bình luận text bình thường, AI sẽ dựa trên log nội dung để rút trích các báo cáo kinh doanh, dự đoán các sản phẩm hot hoặc khách hàng có nguy cơ rời bỏ (at-risk) bằng các luật (rule-based) kết hợp với dữ liệu truy xuất đơn hàng thật để tạo thành chức năng AI Insights cho cấp quản lý (Admin).
